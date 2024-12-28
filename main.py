@@ -1,3 +1,6 @@
+# main.py
+
+# Import packages
 from portfolio import Portfolio
 from optimization import gradient_descent
 import numpy as np

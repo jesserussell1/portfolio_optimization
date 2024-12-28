@@ -1,5 +1,9 @@
+# portfolio.py
+
+# Import packages
 import numpy as np
 
+# Create a Portfolio class
 class Portfolio:
     def __init__(self, num_investments, success_probabilities, returns_on_success, total_capital,
                  perturbation_factor=0.05):
@@ -11,9 +15,11 @@ class Portfolio:
         self.total_capital = total_capital
         self.weights = np.array([1 / num_investments] * num_investments)  # Initial equal distribution
 
+    # Define a method to add perturbation
     def add_perturbation(self, values, perturbation_factor):
         return values * (1 + np.random.uniform(-perturbation_factor, perturbation_factor, size=values.shape))
 
+    # Define a method to simulate the portfolio
     def simulate(self, num_simulations=10000, perturbation_factor=0.05):
         portfolio_returns = []
         for _ in range(num_simulations):
@@ -27,9 +33,11 @@ class Portfolio:
             portfolio_return = np.dot(self.weights, returns)
             portfolio_returns.append(portfolio_return)
 
+        # Calculate portfolio metrics
         portfolio_returns = np.array(portfolio_returns)
         expected_return = np.mean(portfolio_returns)
         risk = np.std(portfolio_returns)
         sharpe_ratio = expected_return / risk if risk != 0 else 0
 
+        # Return portfolio metrics
         return expected_return, risk, sharpe_ratio
